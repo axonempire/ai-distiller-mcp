@@ -85,7 +85,7 @@ def get_user_profile() -> str:
 
 
 @mcp.tool()
-def get_emails(start_date: str = "today", end_date: str = "today", max_emails: int = 10) -> str:
+def get_emails(start_date: str = "yesterday", end_date: str = "today", max_emails: int = 10) -> str:
     """Get the emails from the period specified. If no period is specified, get the emails from the current day."""
     start_datetime = ensure_datetime(start_date)
     end_datetime = ensure_datetime(end_date)

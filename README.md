@@ -28,7 +28,6 @@ To run it in Claude, add this to your `claude_config.json` file:
     },
 ```
 
-
 ## Dev
 
 ### Requirements
@@ -36,35 +35,23 @@ To run it in Claude, add this to your `claude_config.json` file:
 - `pixi`
 - `uv`
 
-### Init the dxt
-
-Init dxt project with a manifest
+### Install dev env
 
 ```sh
-npx @anthropic-ai/dxt init --yes
+pixi clean ; pixi install
 ```
 
-**Note** When creating the manifest, in the `mpc_config` section, put the full path to the python interpreter ->  `"command": "/Users/fperez/.pyenv/shims/python"`
-
-### Bundle Python libs and Package Project
+### Run local server for dev purposes
 
 ```sh
-pixi install
-pixi run bundle
-pixi run pack
+pixi run python -m server.main --debug
 ```
 
-The output `.dxt` file is created on the dxt-package directory. Once the `.dxt` file is created you can drag and drop it to Claude (in the `Settings/Extensions` section.)
+### Testing it with Anthropic MCP Inspector
 
-### Testing it
+**NOTE: Shutdown the local server if you started it**
 
-Run server with:
-
-```sh
-pixi test
-```
-
-Then open the inspector:
+Open the inspector:
 
 ```sh
 DANGEROUSLY_OMIT_AUTH=true npx @modelcontextprotocol/inspector
@@ -85,3 +72,30 @@ And then:
 ```sh
 PYTHONPATH="/Users/fperez/Library/Application Support/Claude/Claude Extensions/local.dxt.francisco-perez-sorrosal.ai-distiler-mcp/server/lib" python /Users/fperez/Library/Application\ Support/Claude/Claude\ Extensions/local.dxt.francisco-perez-sorrosal.ai-distiler-mcp/server/main.py --debug
 ```
+
+## Packaging MCP server as DXT
+
+**TODO!!!**
+
+### Init the dxt
+
+# TODO This does not implemented yet
+
+Init dxt project with a manifest
+
+```sh
+npx @anthropic-ai/dxt init --yes
+```
+
+**Note** When creating the manifest, in the `mpc_config` section, put the full path to the python interpreter ->  `"command": "/Users/fperez/.pyenv/shims/python"`
+
+### Bundle Python libs and Package Project
+
+# TODO This is not implemented yet
+```sh
+pixi install
+pixi run bundle
+pixi run pack
+```
+
+The output `.dxt` file is created on the dxt-package directory. Once the `.dxt` file is created you can drag and drop it to Claude (in the `Settings/Extensions` section.)
