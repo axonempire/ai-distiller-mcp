@@ -1,0 +1,75 @@
+{
+  "dxt_version": "0.1",
+  "name": "ai-news-distiller-mcp",
+  "version": "1.0.0",
+  "description": "A DXT extension to trigger the review of email newsletters to distill AI news",
+  "author": {
+    "name": "Francisco Perez-Sorrosal"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "/Users/fperez/.pyenv/shims/python",
+      "args": [
+        "${__dirname}/server/main.py"
+      ],
+      "env": {
+        "DEBUG": "${user_config.debug}",
+        "PYTHONPATH": "${__dirname}/server/lib",
+        "HOME": "/Users/fperez"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "distill_ai_news",
+      "description": "Returns instructions to distill AI news and events."
+    },
+    {
+      "name": "get_user_profile",
+      "description": "Returns the user profile from the Gmail client."
+    },
+    {
+      "name": "get_emails",
+      "description": "Returns the emails from the period specified.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "start_date": { "type": "string", "description": "Start date for email search" },
+          "end_date": { "type": "string", "description": "End date for email search" },
+          "max_emails": { "type": "integer", "description": "Maximum number of emails to retrieve" }
+        }
+      }
+    }
+  ],  
+  "keywords": [
+    "python",
+    "ai",
+    "news",
+    "events",
+    "email",
+    "archive"
+  ],  
+  "license": "MIT",
+  "user_config": {
+    "debug": {
+      "type": "boolean",
+      "title": "Debug Mode",
+      "description": "Enable debug output",
+      "default": false,
+      "required": false
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "python": ">=3.11.0 <4"
+    }
+  }
+}

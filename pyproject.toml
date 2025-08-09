@@ -1,0 +1,36 @@
+[project]
+authors = [{name = "Francisco Perez-Sorrosal", email = "fperezsorrosal@gmail.com"}]
+description = "MCP Server to access and distill stuff from my email newsletters"
+name = "ai-distiller-mcp"
+requires-python = ">= 3.11"
+version = "0.1.0"
+dependencies = [
+    "click>=8.2.1",
+    "mcp==1.10.1", 
+    "typer>=0.16.0,<0.17", 
+    "loguru>=0.7.3,<0.8", 
+    "pydantic>=2.0,<3",
+    "dspy>=2.6.27,<3", "google-auth>=2.40.3,<3", "google-auth-oauthlib>=1.2.2,<2", "google-auth-httplib2>=0.2.0,<0.3", "google-api-python-client>=2.178.0,<3",
+]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["server"]
+
+[project.scripts]
+mcp-server = "server.main:main"
+
+[tool.pixi.tasks]
+bundle = "uv lock ; rm -rf requirements.txt ; uv export --no-hashes --format requirements-txt > requirements.txt ; pip install -r requirements.txt --target server/lib --upgrade --force-reinstall"
+pack = "npx @anthropic-ai/dxt pack . dxt-package/ai-distiller-mcp.dxt"
+test = "python server/main.py --debug"
